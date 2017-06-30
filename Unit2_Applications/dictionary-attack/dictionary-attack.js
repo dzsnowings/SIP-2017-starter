@@ -1,5 +1,5 @@
-var password = document.getElementById("pw");
 var wordsList = [];
+var pw;
 
 function init() {
   // Load the words from the dictionary text file to wordsList
@@ -13,33 +13,54 @@ function init() {
 
 window.onload = init;
 
-/* ADD YOUR CODE BELOW */
-function checkPassword(){
-  var pw = document.getElementById("pw").value;
-  console.log(pw);
+function checkpassword() {
+  pw = document.getElementById("pw").value;
+  var pwReplaced = pw;
+  // for (i = 0; i < 10; i++) {
+  for(let i = 0; i <pw.length; i++) {
+    if(pwReplaced.includes(2017)) {
+      var position = pwReplaced.search(2017);
+      pwReplaced = pwReplaced.slice(0, position);
+    }
+    if(pwReplaced.includes(17)) {
+      var position = pwReplaced.search(17);
+      pwReplaced = pwReplaced.slice(0, position);
+    }
+    if (pw[i].includes(0)) {
+      pwReplaced = pwReplaced.replace(/0/g, "o");
+    }
+    if (pw[i].includes(1)) {
+      pwReplaced = pwReplaced.replace(/1/g, "l");
+    }
+    if (pw[i].includes(2)) {
+      pwReplaced = pwReplaced.replace(/2/g, "z");
+    }
+    if (pw[i].includes(3)) {
+      pwReplaced = pwReplaced.replace(/3/g, "e");
+    }
+    if (pw.includes(4)) {
+      pwReplaced = pwReplaced.replace(/4/g, "a");
+    }
+    if (pw.includes(5)) {
+      pwReplaced = pwReplaced.replace(/5/g, "s");
+    }
+    if (pw.includes(6)) {
+      pwReplaced = pwReplaced.replace(/6/g, "g");
+    }
+    if (pw.includes(9)) {
+      pwReplaced = pwReplaced.replace(/9/g, "g");
+    }
+    if (pw.includes("!")) {
+      pwReplaced = pwReplaced.replace(/!/g, "i");
+    }
+  }
+  var pwLower = pwReplaced.toLowerCase();
   for (i = 0; i < wordsList.length; i++) {
-    if (pw === wordsList[i]) {
-      document.getElementById("results").innerHTML = "Your password " + pw + " is not secure and can be bruteforced. Please change your password to one that doesn't matches a dictionary word.";
+    if  (pwLower === wordsList[i]) {
+      document.getElementById("results").innerHTML = "Your password '" + pw + "' is weak, not secure, and can be found in a dictionary attack.\
+      Please change your password so that it does not match a word in the dictionary.";
       return;
     }
   }
-  document.getElementById("results").innerHTML = "Congratulations! Your password " + pw + " is secure and cannot be bruteforced.";
-}
-
-/*  password.toLowerCase();
-  window.alert(password);
-  console.log(password);
-/*  if(password.includes("0" or "1" or "2" or "3" or "4" or "5" or "6" or "9")){
-    password.replace("0", "o");
-    password.replace("1", "i");
-    password.replace("2", "z");
-    password.replace("3", "e");
-    password.replace("4", "a");
-    password.replace("5", "s");
-    password.replace("6", "g");
-    password.replace("9", "g");
-  }
-
-  password.localeCompare(wordsFile);
-  */
+  document.getElementById("results").innerHTML = "Congratulations! Your password '" + pw + "' is strong, secure, and cannot be found in a dictionary attack."
 }
