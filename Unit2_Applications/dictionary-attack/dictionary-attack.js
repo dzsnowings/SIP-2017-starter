@@ -17,10 +17,15 @@ window.onload = init;
 function checkPassword(){
   var pw = document.getElementById("pw").value;
   console.log(pw);
-  document.getElementById("results").innerHTML = pw;
-  for (password in wordsList) {
-    document.getElementById("results").innerHTML = password;
+  for (i = 0; i < wordsList.length; i++) {
+    if (pw === wordsList[i]) {
+      document.getElementById("results").innerHTML = "Your password " + pw + " is not secure and can be bruteforced. Please change your password to one that doesn't matches a dictionary word.";
+      return;
+    }
   }
+  document.getElementById("results").innerHTML = "Congratulations! Your password " + pw + " is secure and cannot be bruteforced.";
+}
+
 /*  password.toLowerCase();
   window.alert(password);
   console.log(password);
